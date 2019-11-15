@@ -7,6 +7,9 @@ public class Cartas {
     String nombre, objetivo, velocidad;
     int daño, ptsVida, coste;
 
+    public Cartas() {
+    }
+
     public Cartas(String nombre, String objetivo, String velocidad, int daño, int ptsVida, int coste) {
         this.nombre = nombre;
         this.objetivo = objetivo;

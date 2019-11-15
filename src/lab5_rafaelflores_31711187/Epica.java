@@ -10,11 +10,7 @@ import java.util.ArrayList;
 public class Epica extends Cartas{
     ArrayList<Cartas> posiblesCarta = new ArrayList();
 
-    public Epica(String nombre, String objetivo, String velocidad, int daño, int ptsVida, int coste) {
-        super(nombre, objetivo, velocidad, daño, ptsVida, coste);
-    }
-
-    public void setPosiblesCarta(ArrayList<Cartas> posiblesCarta) {
+    public Epica() {
         this.posiblesCarta.add(new Cartas("Golem", "Terrestres", "Baja", 0, 0, 8));
         this.posiblesCarta.add(new Cartas("Dragon", "Aereos y Terrestres", "Media", 0, 0, 4));
     }
