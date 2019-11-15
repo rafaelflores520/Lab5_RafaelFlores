@@ -75,7 +75,6 @@ public class Main extends javax.swing.JFrame {
         jSpinner1 = new javax.swing.JSpinner();
         jSpinner2 = new javax.swing.JSpinner();
         jPopOpcionCarta = new javax.swing.JPopupMenu();
-        JItemMod = new javax.swing.JMenuItem();
         jItemInfo = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -346,10 +345,12 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        JItemMod.setText("jMenuItem1");
-        jPopOpcionCarta.add(JItemMod);
-
         jItemInfo.setText("Ver Información");
+        jItemInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jItemInfoActionPerformed(evt);
+            }
+        });
         jPopOpcionCarta.add(jItemInfo);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -366,6 +367,11 @@ public class Main extends javax.swing.JFrame {
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Mazo 3");
         treeNode1.add(treeNode2);
         jTreeMazos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTreeMazos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTreeMazosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTreeMazos);
 
         jLabel10.setText("Mazos");
@@ -665,7 +671,7 @@ public class Main extends javax.swing.JFrame {
                 DefaultMutableTreeNode n = new DefaultMutableTreeNode(actual.getClass().getSimpleName());
                 DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
                 n.add(p);
-                ((DefaultMutableTreeNode) raiz.getChildAt(1)).add(n);
+                ((DefaultMutableTreeNode) raiz.getChildAt(2)).add(n);
             }
             UActual.setMazos(modeloArbol);
             modeloArbol.reload();
@@ -673,20 +679,35 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jItemM3ActionPerformed
 
     private void btnModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModMouseClicked
-        try {
-            if (this.jSpinner1.getValue().toString().equals("0") || this.jSpinner2.getValue().toString().equals("0")) {
-                JOptionPane.showMessageDialog(this.jDiagModificarCarta, "Debe llenar ambos campos");
-            }else{
-                actual.setDaño(Integer.parseInt(this.jSpinner1.getValue().toString()));
-                actual.setPtsVida(Integer.parseInt(this.jSpinner1.getValue().toString()));
-                jSpinner1.setValue(0);
-                jSpinner2.setValue(0);
-                this.jDiagModificarCarta.setVisible(false);
-            }
-        } catch (InputMismatchException e) {
-            JOptionPane.showMessageDialog(this.jDiagModificarCarta, "No puede Ingresar datos que no sean numéricos", "ERROR", JOptionPane.ERROR_MESSAGE);
+        
+        if (this.jSpinner1.getValue().toString().equals("0") || this.jSpinner2.getValue().toString().equals("0")) {
+            JOptionPane.showMessageDialog(this.jDiagModificarCarta, "Debe llenar ambos campos");
+        } else {
+            actual.setDaño(Integer.parseInt(this.jSpinner1.getValue().toString()));
+            actual.setPtsVida(Integer.parseInt(this.jSpinner1.getValue().toString()));
+            jSpinner1.setValue(0);
+            jSpinner2.setValue(0);
+            this.jDiagModificarCarta.setVisible(false);
         }
+
     }//GEN-LAST:event_btnModMouseClicked
+
+    private void jTreeMazosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTreeMazosMouseClicked
+        if (evt.isMetaDown()) {
+            int row = this.jTreeMazos.getClosestRowForLocation(evt.getX(), evt.getY());
+            this.jTreeMazos.setSelectionRow(row);
+            
+            Object v1 = this.jTreeMazos.getSelectionPath().getLastPathComponent(); 
+            this.NodoActual = (DefaultMutableTreeNode) v1;
+            actual = (Cartas) NodoActual.getUserObject();
+            this.jPopOpcionCarta.show(evt.getComponent(), evt.getX(),evt.getY()); 
+            
+        }
+    }//GEN-LAST:event_jTreeMazosMouseClicked
+
+    private void jItemInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemInfoActionPerformed
+        JOptionPane.showMessageDialog(this, actual.informacion());
+    }//GEN-LAST:event_jItemInfoActionPerformed
 
     public void CargarCartas(){
         DefaultListModel list = (DefaultListModel)this.jListCartas.getModel();
@@ -738,7 +759,6 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem JItemMod;
     private javax.swing.JButton btnColor;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnMod;
@@ -799,6 +819,7 @@ public class Main extends javax.swing.JFrame {
     Comun c = new Comun();
     Cartas actual;
     Persona UActual;
+    DefaultMutableTreeNode NodoActual;
     
     boolean log = false;
     
