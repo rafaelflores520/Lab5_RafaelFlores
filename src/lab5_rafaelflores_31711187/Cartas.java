@@ -69,7 +69,12 @@ public class Cartas {
 
     @Override
     public String toString() {
-        return nombre;
+        return "La Carta "+nombre
+                +"\nAtaca objetivos: "+objetivo
+                +"\nTiene una Velocidad: "+velocidad+"Km/h"
+                +"\nInflinge un Daño: "+daño+"pts"
+                +"\nTienes estos puntos de Vida: "+ptsVida+"pts"
+                +"\nTienes un coste de: "+coste+" elixir";
     }
     
     

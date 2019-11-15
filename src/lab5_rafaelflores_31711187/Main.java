@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -23,7 +25,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        Users.add(new Persona("Rafael", "Flores", "rafac", "1234", new Date(), 21, Color.cyan, new Mazo(), new Mazo(), new Mazo()));
+        Users.add(new Persona("Rafael", "Flores", "rafac", "1234", new Date(), 21, Color.cyan));
     }
 
     /**
@@ -60,6 +62,20 @@ public class Main extends javax.swing.JFrame {
         btnColor = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jPopAgregarCarta = new javax.swing.JPopupMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jItemM1 = new javax.swing.JMenuItem();
+        jItemM2 = new javax.swing.JMenuItem();
+        jItemM3 = new javax.swing.JMenuItem();
+        jDiagModificarCarta = new javax.swing.JDialog();
+        lblTitulo = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        txtDaño = new javax.swing.JTextField();
+        txtPtsVida = new javax.swing.JTextField();
+        btnMod = new javax.swing.JButton();
+        jPopOpcionCarta = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
@@ -244,6 +260,94 @@ public class Main extends javax.swing.JFrame {
 
         jLabel2.setText("jLabel2");
 
+        jMenu3.setText("Agregar Carta...");
+
+        jItemM1.setText("Mazo 1");
+        jItemM1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jItemM1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jItemM1);
+
+        jItemM2.setText("Mazo 2");
+        jItemM2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jItemM2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jItemM2);
+
+        jItemM3.setText("Mazo 3");
+        jItemM3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jItemM3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jItemM3);
+
+        jPopAgregarCarta.add(jMenu3);
+
+        lblTitulo.setText("Modificar");
+
+        jLabel13.setText("Daño");
+
+        jLabel14.setText("Puntos de Vida");
+
+        btnMod.setText("Modificar");
+        btnMod.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDiagModificarCartaLayout = new javax.swing.GroupLayout(jDiagModificarCarta.getContentPane());
+        jDiagModificarCarta.getContentPane().setLayout(jDiagModificarCartaLayout);
+        jDiagModificarCartaLayout.setHorizontalGroup(
+            jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDiagModificarCartaLayout.createSequentialGroup()
+                .addGroup(jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDiagModificarCartaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTitulo)
+                            .addGroup(jDiagModificarCartaLayout.createSequentialGroup()
+                                .addGroup(jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14))
+                                .addGap(46, 46, 46)
+                                .addGroup(jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDaño, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                                    .addComponent(txtPtsVida)))))
+                    .addGroup(jDiagModificarCartaLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(btnMod)))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        jDiagModificarCartaLayout.setVerticalGroup(
+            jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDiagModificarCartaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtDaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtPtsVida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnMod)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        jMenuItem1.setText("jMenuItem1");
+        jPopOpcionCarta.add(jMenuItem1);
+
+        jMenuItem2.setText("jMenuItem2");
+        jPopOpcionCarta.add(jMenuItem2);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setEnabled(false);
@@ -393,6 +497,7 @@ public class Main extends javax.swing.JFrame {
                     this.jTabbedPane2.setEnabled(true);
                     this.log = true;
                     this.jDiagLogin.dispose();
+                    UActual = Users.get(i);
                     CargarCartas();
                     return;
                 }
@@ -410,7 +515,7 @@ public class Main extends javax.swing.JFrame {
             long Edad = (fecha.getTime() - fechaN.getTime())/ (1000 * 60 * 60 * 24 /365);
             
             Users.add(new Persona(this.txtNombre.getText(), this.txtApellido.getText(), this.txtUser.getText(), this.txtPass.getText(),
-            fechaN, (int)Edad, this.btnColor.getBackground(), new Mazo(), new Mazo(), new Mazo()));
+            fechaN, (int)Edad, this.btnColor.getBackground()));
         }
     }//GEN-LAST:event_btnRegistroMouseClicked
 
@@ -437,6 +542,114 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jListCartasMouseClicked
 
+    private void jItemM1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemM1ActionPerformed
+        DefaultTreeModel modeloArbol = (DefaultTreeModel) this.jTreeMazos.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modeloArbol.getRoot();
+        DefaultListModel modeloLista = (DefaultListModel) this.jListCartas.getModel();
+        boolean exist = false;
+        int centinela = -1;
+        
+        if (raiz.getChildAt(0).getChildCount() == 3) {
+            JOptionPane.showMessageDialog(this, "Ya no puede añadir más cartas");
+        }else{
+            this.lblTitulo.setText("Ingrese lo sisguiente Valores para crear la carta:");
+            this.jDiagModificarCarta.setModal(true); //Permite que al abrir la subventana, se bloquee la vista anterior
+            this.jDiagModificarCarta.pack();
+            this.jDiagModificarCarta.setLocationRelativeTo(this);
+            this.jDiagModificarCarta.setVisible(true);
+            actual = ((Cartas) modeloLista.get(this.jListCartas.getSelectedIndex()));
+            for (int i = 0; i < raiz.getChildAt(0).getChildCount(); i++) {
+                if (raiz.getChildAt(0).getChildAt(i).toString().equals(actual.getNombre())) {
+                    JOptionPane.showMessageDialog(this, "Este Nodo ya existe!!!");
+                    exist = true;
+                }
+            }
+            if (!exist) {
+                DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
+                ((DefaultMutableTreeNode) raiz.getChildAt(0)).add(p);
+            }
+            UActual.setMazos(modeloArbol);
+            modeloArbol.reload();
+        }
+    }//GEN-LAST:event_jItemM1ActionPerformed
+
+    private void jItemM2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemM2ActionPerformed
+        DefaultTreeModel modeloArbol = (DefaultTreeModel) this.jTreeMazos.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modeloArbol.getRoot();
+        DefaultListModel modeloLista = (DefaultListModel) this.jListCartas.getModel();
+        boolean exist = false;
+        
+        if (raiz.getChildAt(1).getChildCount() == 3) {
+            JOptionPane.showMessageDialog(this, "Ya no puede añadir más cartas");
+        }else{
+            this.lblTitulo.setText("Ingrese lo sisguiente Valores para crear la carta:");
+            
+            this.jDiagModificarCarta.setModal(true); //Permite que al abrir la subventana, se bloquee la vista anterior
+            this.jDiagModificarCarta.pack();
+            this.jDiagModificarCarta.setLocationRelativeTo(this);
+            this.jDiagModificarCarta.setVisible(true);
+            actual = ((Cartas) modeloLista.get(this.jListCartas.getSelectedIndex()));
+            for (int i = 0; i < raiz.getChildAt(1).getChildCount(); i++) {
+                if (raiz.getChildAt(1).getChildAt(i).toString().equals(actual.getNombre())) {
+                    JOptionPane.showMessageDialog(this, "Este Nodo ya existe!!!");
+                    exist = true;
+                }
+            }
+            if (!exist) {
+                DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
+                ((DefaultMutableTreeNode) raiz.getChildAt(1)).add(p);
+            }
+            UActual.setMazos(modeloArbol);
+            modeloArbol.reload();
+        }
+    }//GEN-LAST:event_jItemM2ActionPerformed
+
+    private void jItemM3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemM3ActionPerformed
+        DefaultTreeModel modeloArbol = (DefaultTreeModel) this.jTreeMazos.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modeloArbol.getRoot();
+        DefaultListModel modeloLista = (DefaultListModel) this.jListCartas.getModel();
+        boolean exist = false;
+        
+        if (raiz.getChildAt(2).getChildCount() == 3) {
+            JOptionPane.showMessageDialog(this, "Ya no puede añadir más cartas");
+        }else{
+            this.lblTitulo.setText("Ingrese lo sisguiente Valores para crear la carta:");
+            this.jDiagModificarCarta.setModal(true); //Permite que al abrir la subventana, se bloquee la vista anterior
+            this.jDiagModificarCarta.pack();
+            this.jDiagModificarCarta.setLocationRelativeTo(this);
+            this.jDiagModificarCarta.setVisible(true);
+            actual = ((Cartas) modeloLista.get(this.jListCartas.getSelectedIndex()));
+            for (int i = 0; i < raiz.getChildAt(2).getChildCount(); i++) {
+                if (raiz.getChildAt(2).getChildAt(i).toString().equals(actual.getNombre())) {
+                    JOptionPane.showMessageDialog(this, "Este Nodo ya existe!!!");
+                    exist = true;
+                }
+            }
+            if (!exist) {
+                DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
+                ((DefaultMutableTreeNode) raiz.getChildAt(2)).add(p);
+            }
+            UActual.setMazos(modeloArbol);
+            modeloArbol.reload();
+        }
+    }//GEN-LAST:event_jItemM3ActionPerformed
+
+    private void btnModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModMouseClicked
+        try {
+            if (this.txtDaño.getText().equals("") && this.txtPtsVida.getText().equals("")) {
+                JOptionPane.showMessageDialog(this.jDiagModificarCarta, "Debe llenar ambos campos");
+            }else{
+                actual.setDaño(Integer.valueOf(this.txtDaño.getText()));
+                actual.setPtsVida(Integer.valueOf(this.txtPtsVida.getText()));
+                this.txtDaño.setText("");
+                this.txtPtsVida.setText("");
+                this.setVisible(false);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this.jDiagModificarCarta, "No puede Ingresar datos que no sean numéricos", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnModMouseClicked
+
     public void CargarCartas(){
         DefaultListModel list = (DefaultListModel)this.jListCartas.getModel();
         for (int i = 0; i < 2; i++) {
@@ -444,11 +657,12 @@ public class Main extends javax.swing.JFrame {
             list.addElement(e.getPosiblesCarta().get(i));
             list.addElement(es.getPosiblesCarta().get(i));
             list.addElement(c.getPosiblesCarta().get(i));
-            System.out.println("Hola");
         }
         
         this.jListCartas.setModel(list);
-        
+        if (UActual.getMazos() != null) {
+            this.jTreeMazos.setModel(UActual.getMazos());
+        }
     }
     /**
      * @param args the command line arguments
@@ -488,12 +702,19 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnColor;
     private javax.swing.JButton btnIngresar;
+    private javax.swing.JButton btnMod;
     private javax.swing.JButton btnRegistro;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JDialog jDiagLogin;
+    private javax.swing.JDialog jDiagModificarCarta;
+    private javax.swing.JMenuItem jItemM1;
+    private javax.swing.JMenuItem jItemM2;
+    private javax.swing.JMenuItem jItemM3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -505,7 +726,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JList<String> jListCartas;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -513,16 +737,20 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPopupMenu jPopAgregarCarta;
+    private javax.swing.JPopupMenu jPopOpcionCarta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTree jTreeMazos;
     private javax.swing.JLabel label2;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtDaño;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPass;
     private javax.swing.JTextField txtPassR;
+    private javax.swing.JTextField txtPtsVida;
     private javax.swing.JTextField txtUser;
     private javax.swing.JTextField txtUserR;
     // End of variables declaration//GEN-END:variables
@@ -531,6 +759,8 @@ public class Main extends javax.swing.JFrame {
     Epica e = new Epica();
     Especial es = new Especial();
     Comun c = new Comun();
+    Cartas actual;
+    Persona UActual;
     
     boolean log = false;
     
