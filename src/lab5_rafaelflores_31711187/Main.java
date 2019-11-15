@@ -26,6 +26,8 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        this.jListCartas.setVisible(false);
+        this.jTreeMazos.setVisible(false);
         Users.add(new Persona("Rafael", "Flores", "rafac", "1234", new Date(), 21, Color.cyan));
     }
 
@@ -101,6 +103,9 @@ public class Main extends javax.swing.JFrame {
         btnIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnIngresarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnIngresarMouseEntered(evt);
             }
         });
 
@@ -359,6 +364,8 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane2.setEnabled(false);
 
+        jPanel4.setEnabled(false);
+
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Mazos");
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Mazo 1");
         treeNode1.add(treeNode2);
@@ -367,6 +374,7 @@ public class Main extends javax.swing.JFrame {
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Mazo 3");
         treeNode1.add(treeNode2);
         jTreeMazos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTreeMazos.setEnabled(false);
         jTreeMazos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTreeMazosMouseClicked(evt);
@@ -377,6 +385,7 @@ public class Main extends javax.swing.JFrame {
         jLabel10.setText("Mazos");
 
         jListCartas.setModel(new DefaultListModel());
+        jListCartas.setEnabled(false);
         jListCartas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jListCartasMouseClicked(evt);
@@ -504,11 +513,16 @@ public class Main extends javax.swing.JFrame {
                 if (Users.get(i).getUser().equals(this.txtUser.getText()) 
                         && Users.get(i).getPass().equals(this.txtPass.getText())) {
                     JOptionPane.showMessageDialog(this.jDiagLogin, "Bienvenido al Sistema!!!!");
+                    this.jListCartas.setVisible(true);
+                    this.jTreeMazos.setVisible(true);
+                    this.jListCartas.setEnabled(true);
+                    this.jTreeMazos.setEnabled(true);
                     this.jTabbedPane2.setEnabled(true);
                     this.log = true;
                     this.jDiagLogin.dispose();
                     UActual = Users.get(i);
                     CargarCartas();
+                    
                     return;
                 }
             }
@@ -571,16 +585,18 @@ public class Main extends javax.swing.JFrame {
             
             for (int i = 0; i < raiz.getChildAt(0).getChildCount(); i++) {
                 for (int j = 0; j < raiz.getChildAt(0).getChildAt(i).getChildCount(); j++) {
-                    if (raiz.getChildAt(0).getChildAt(j).toString().equals(actual.getNombre())) {
+                    if (raiz.getChildAt(0).getChildAt(i).getChildAt(j).toString().equals(actual.getNombre())) {
                         JOptionPane.showMessageDialog(this, "Este Nodo ya existe!!!");
                         exist = true;
                         centinela = 1;
                     }
                 }
-                if (!exist) {
-                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
-                    ((DefaultMutableTreeNode) raiz.getChildAt(0)).add(p);
-                    centinela = 1;
+                if (raiz.getChildAt(0).getChildAt(i).toString().equals(actual.getClass().getSimpleName())) {
+                    if (!exist) {
+                        DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
+                        ((DefaultMutableTreeNode) raiz.getChildAt(0).getChildAt(i)).add(p);
+                        centinela = 1;
+                    }
                 }
             }
             if (centinela == -1) {
@@ -613,16 +629,18 @@ public class Main extends javax.swing.JFrame {
             
             for (int i = 0; i < raiz.getChildAt(1).getChildCount(); i++) {
                 for (int j = 0; j < raiz.getChildAt(1).getChildAt(i).getChildCount(); j++) {
-                    if (raiz.getChildAt(1).getChildAt(j).toString().equals(actual.getNombre())) {
+                    if (raiz.getChildAt(1).getChildAt(i).getChildAt(j).toString().equals(actual.getNombre())) {
                         JOptionPane.showMessageDialog(this, "Este Nodo ya existe!!!");
                         exist = true;
                         centinela = 1;
                     }
                 }
-                if (!exist) {
-                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
-                    ((DefaultMutableTreeNode) raiz.getChildAt(1)).add(p);
-                    centinela = 1;
+                if (raiz.getChildAt(1).getChildAt(i).toString().equals(actual.getClass().getSimpleName())) {
+                    if (!exist) {
+                        DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
+                        ((DefaultMutableTreeNode) raiz.getChildAt(1).getChildAt(i)).add(p);
+                        centinela = 1;
+                    }
                 }
             }
             
@@ -655,16 +673,18 @@ public class Main extends javax.swing.JFrame {
             this.jDiagModificarCarta.setVisible(true);
             for (int i = 0; i < raiz.getChildAt(2).getChildCount(); i++) {
                 for (int j = 0; j < raiz.getChildAt(2).getChildAt(i).getChildCount(); j++) {
-                    if (raiz.getChildAt(2).getChildAt(j).toString().equals(actual.getNombre())) {
+                    if (raiz.getChildAt(2).getChildAt(i).getChildAt(j).toString().equals(actual.getNombre())) {
                         JOptionPane.showMessageDialog(this, "Este Nodo ya existe!!!");
                         exist = true;
                         centinela = 1;
                     }
                 }
-                if (!exist) {
-                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
-                    ((DefaultMutableTreeNode) raiz.getChildAt(2)).add(p);
-                    centinela = 1;
+                if (raiz.getChildAt(2).getChildAt(i).toString().equals(actual.getClass().getSimpleName())) {
+                    if (!exist) {
+                        DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
+                        ((DefaultMutableTreeNode) raiz.getChildAt(2).getChildAt(i)).add(p);
+                        centinela = 1;
+                    }
                 }
             }
             if (centinela == -1) {
@@ -708,6 +728,10 @@ public class Main extends javax.swing.JFrame {
     private void jItemInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemInfoActionPerformed
         JOptionPane.showMessageDialog(this, actual.informacion());
     }//GEN-LAST:event_jItemInfoActionPerformed
+
+    private void btnIngresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnIngresarMouseEntered
 
     public void CargarCartas(){
         DefaultListModel list = (DefaultListModel)this.jListCartas.getModel();
