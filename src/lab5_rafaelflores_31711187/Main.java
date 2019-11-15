@@ -8,6 +8,7 @@ package lab5_rafaelflores_31711187;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.InputMismatchException;
 import javax.swing.DefaultListModel;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
@@ -70,12 +71,12 @@ public class Main extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        txtDaño = new javax.swing.JTextField();
-        txtPtsVida = new javax.swing.JTextField();
         btnMod = new javax.swing.JButton();
+        jSpinner1 = new javax.swing.JSpinner();
+        jSpinner2 = new javax.swing.JSpinner();
         jPopOpcionCarta = new javax.swing.JPopupMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        JItemMod = new javax.swing.JMenuItem();
+        jItemInfo = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
@@ -301,28 +302,31 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 20));
+
+        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 20));
+
         javax.swing.GroupLayout jDiagModificarCartaLayout = new javax.swing.GroupLayout(jDiagModificarCarta.getContentPane());
         jDiagModificarCarta.getContentPane().setLayout(jDiagModificarCartaLayout);
         jDiagModificarCartaLayout.setHorizontalGroup(
             jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDiagModificarCartaLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitulo)
                     .addGroup(jDiagModificarCartaLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitulo)
-                            .addGroup(jDiagModificarCartaLayout.createSequentialGroup()
-                                .addGroup(jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14))
-                                .addGap(46, 46, 46)
-                                .addGroup(jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtDaño, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                                    .addComponent(txtPtsVida)))))
-                    .addGroup(jDiagModificarCartaLayout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(btnMod)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addGroup(jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSpinner1)
+                            .addComponent(jSpinner2, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                        .addGap(36, 36, 36))))
+            .addGroup(jDiagModificarCartaLayout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(btnMod)
+                .addGap(27, 27, 27))
         );
         jDiagModificarCartaLayout.setVerticalGroup(
             jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,21 +336,21 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(txtDaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jDiagModificarCartaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(txtPtsVida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnMod)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        jMenuItem1.setText("jMenuItem1");
-        jPopOpcionCarta.add(jMenuItem1);
+        JItemMod.setText("jMenuItem1");
+        jPopOpcionCarta.add(JItemMod);
 
-        jMenuItem2.setText("jMenuItem2");
-        jPopOpcionCarta.add(jMenuItem2);
+        jItemInfo.setText("Ver Información");
+        jPopOpcionCarta.add(jItemInfo);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -552,21 +556,32 @@ public class Main extends javax.swing.JFrame {
         if (raiz.getChildAt(0).getChildCount() == 3) {
             JOptionPane.showMessageDialog(this, "Ya no puede añadir más cartas");
         }else{
+            actual = ((Cartas) modeloLista.get(this.jListCartas.getSelectedIndex()));
             this.lblTitulo.setText("Ingrese lo sisguiente Valores para crear la carta:");
             this.jDiagModificarCarta.setModal(true); //Permite que al abrir la subventana, se bloquee la vista anterior
             this.jDiagModificarCarta.pack();
             this.jDiagModificarCarta.setLocationRelativeTo(this);
             this.jDiagModificarCarta.setVisible(true);
-            actual = ((Cartas) modeloLista.get(this.jListCartas.getSelectedIndex()));
+            
             for (int i = 0; i < raiz.getChildAt(0).getChildCount(); i++) {
-                if (raiz.getChildAt(0).getChildAt(i).toString().equals(actual.getNombre())) {
-                    JOptionPane.showMessageDialog(this, "Este Nodo ya existe!!!");
-                    exist = true;
+                for (int j = 0; j < raiz.getChildAt(0).getChildAt(i).getChildCount(); j++) {
+                    if (raiz.getChildAt(0).getChildAt(j).toString().equals(actual.getNombre())) {
+                        JOptionPane.showMessageDialog(this, "Este Nodo ya existe!!!");
+                        exist = true;
+                        centinela = 1;
+                    }
+                }
+                if (!exist) {
+                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
+                    ((DefaultMutableTreeNode) raiz.getChildAt(0)).add(p);
+                    centinela = 1;
                 }
             }
-            if (!exist) {
+            if (centinela == -1) {
+                DefaultMutableTreeNode n = new DefaultMutableTreeNode(actual.getClass().getSimpleName());
                 DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
-                ((DefaultMutableTreeNode) raiz.getChildAt(0)).add(p);
+                n.add(p);
+                ((DefaultMutableTreeNode) raiz.getChildAt(0)).add(n);
             }
             UActual.setMazos(modeloArbol);
             modeloArbol.reload();
@@ -577,27 +592,39 @@ public class Main extends javax.swing.JFrame {
         DefaultTreeModel modeloArbol = (DefaultTreeModel) this.jTreeMazos.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modeloArbol.getRoot();
         DefaultListModel modeloLista = (DefaultListModel) this.jListCartas.getModel();
+        int centinela = -1;
         boolean exist = false;
         
         if (raiz.getChildAt(1).getChildCount() == 3) {
             JOptionPane.showMessageDialog(this, "Ya no puede añadir más cartas");
         }else{
+            actual = ((Cartas) modeloLista.get(this.jListCartas.getSelectedIndex()));
             this.lblTitulo.setText("Ingrese lo sisguiente Valores para crear la carta:");
-            
             this.jDiagModificarCarta.setModal(true); //Permite que al abrir la subventana, se bloquee la vista anterior
             this.jDiagModificarCarta.pack();
             this.jDiagModificarCarta.setLocationRelativeTo(this);
             this.jDiagModificarCarta.setVisible(true);
-            actual = ((Cartas) modeloLista.get(this.jListCartas.getSelectedIndex()));
+            
             for (int i = 0; i < raiz.getChildAt(1).getChildCount(); i++) {
-                if (raiz.getChildAt(1).getChildAt(i).toString().equals(actual.getNombre())) {
-                    JOptionPane.showMessageDialog(this, "Este Nodo ya existe!!!");
-                    exist = true;
+                for (int j = 0; j < raiz.getChildAt(1).getChildAt(i).getChildCount(); j++) {
+                    if (raiz.getChildAt(1).getChildAt(j).toString().equals(actual.getNombre())) {
+                        JOptionPane.showMessageDialog(this, "Este Nodo ya existe!!!");
+                        exist = true;
+                        centinela = 1;
+                    }
+                }
+                if (!exist) {
+                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
+                    ((DefaultMutableTreeNode) raiz.getChildAt(1)).add(p);
+                    centinela = 1;
                 }
             }
-            if (!exist) {
+            
+            if (centinela == -1) {
+                DefaultMutableTreeNode n = new DefaultMutableTreeNode(actual.getClass().getSimpleName());
                 DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
-                ((DefaultMutableTreeNode) raiz.getChildAt(1)).add(p);
+                n.add(p);
+                ((DefaultMutableTreeNode) raiz.getChildAt(1)).add(n);
             }
             UActual.setMazos(modeloArbol);
             modeloArbol.reload();
@@ -609,25 +636,36 @@ public class Main extends javax.swing.JFrame {
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modeloArbol.getRoot();
         DefaultListModel modeloLista = (DefaultListModel) this.jListCartas.getModel();
         boolean exist = false;
+        int centinela = -1;
         
         if (raiz.getChildAt(2).getChildCount() == 3) {
             JOptionPane.showMessageDialog(this, "Ya no puede añadir más cartas");
         }else{
+            actual = ((Cartas) modeloLista.get(this.jListCartas.getSelectedIndex()));
             this.lblTitulo.setText("Ingrese lo sisguiente Valores para crear la carta:");
             this.jDiagModificarCarta.setModal(true); //Permite que al abrir la subventana, se bloquee la vista anterior
             this.jDiagModificarCarta.pack();
             this.jDiagModificarCarta.setLocationRelativeTo(this);
             this.jDiagModificarCarta.setVisible(true);
-            actual = ((Cartas) modeloLista.get(this.jListCartas.getSelectedIndex()));
             for (int i = 0; i < raiz.getChildAt(2).getChildCount(); i++) {
-                if (raiz.getChildAt(2).getChildAt(i).toString().equals(actual.getNombre())) {
-                    JOptionPane.showMessageDialog(this, "Este Nodo ya existe!!!");
-                    exist = true;
+                for (int j = 0; j < raiz.getChildAt(2).getChildAt(i).getChildCount(); j++) {
+                    if (raiz.getChildAt(2).getChildAt(j).toString().equals(actual.getNombre())) {
+                        JOptionPane.showMessageDialog(this, "Este Nodo ya existe!!!");
+                        exist = true;
+                        centinela = 1;
+                    }
+                }
+                if (!exist) {
+                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
+                    ((DefaultMutableTreeNode) raiz.getChildAt(2)).add(p);
+                    centinela = 1;
                 }
             }
-            if (!exist) {
+            if (centinela == -1) {
+                DefaultMutableTreeNode n = new DefaultMutableTreeNode(actual.getClass().getSimpleName());
                 DefaultMutableTreeNode p = new DefaultMutableTreeNode(actual);
-                ((DefaultMutableTreeNode) raiz.getChildAt(2)).add(p);
+                n.add(p);
+                ((DefaultMutableTreeNode) raiz.getChildAt(1)).add(n);
             }
             UActual.setMazos(modeloArbol);
             modeloArbol.reload();
@@ -636,16 +674,16 @@ public class Main extends javax.swing.JFrame {
 
     private void btnModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModMouseClicked
         try {
-            if (this.txtDaño.getText().equals("") && this.txtPtsVida.getText().equals("")) {
+            if (this.jSpinner1.getValue().toString().equals("0") || this.jSpinner2.getValue().toString().equals("0")) {
                 JOptionPane.showMessageDialog(this.jDiagModificarCarta, "Debe llenar ambos campos");
             }else{
-                actual.setDaño(Integer.valueOf(this.txtDaño.getText()));
-                actual.setPtsVida(Integer.valueOf(this.txtPtsVida.getText()));
-                this.txtDaño.setText("");
-                this.txtPtsVida.setText("");
-                this.setVisible(false);
+                actual.setDaño(Integer.parseInt(this.jSpinner1.getValue().toString()));
+                actual.setPtsVida(Integer.parseInt(this.jSpinner1.getValue().toString()));
+                jSpinner1.setValue(0);
+                jSpinner2.setValue(0);
+                this.jDiagModificarCarta.setVisible(false);
             }
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             JOptionPane.showMessageDialog(this.jDiagModificarCarta, "No puede Ingresar datos que no sean numéricos", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnModMouseClicked
@@ -700,6 +738,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem JItemMod;
     private javax.swing.JButton btnColor;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnMod;
@@ -707,6 +746,7 @@ public class Main extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JDialog jDiagLogin;
     private javax.swing.JDialog jDiagModificarCarta;
+    private javax.swing.JMenuItem jItemInfo;
     private javax.swing.JMenuItem jItemM1;
     private javax.swing.JMenuItem jItemM2;
     private javax.swing.JMenuItem jItemM3;
@@ -728,8 +768,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -740,17 +778,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopOpcionCarta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTree jTreeMazos;
     private javax.swing.JLabel label2;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtDaño;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPass;
     private javax.swing.JTextField txtPassR;
-    private javax.swing.JTextField txtPtsVida;
     private javax.swing.JTextField txtUser;
     private javax.swing.JTextField txtUserR;
     // End of variables declaration//GEN-END:variables

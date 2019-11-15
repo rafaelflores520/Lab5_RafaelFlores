@@ -14,9 +14,13 @@ import java.util.ArrayList;
 public class Comun extends Cartas{
     ArrayList<Cartas> posiblesCarta = new ArrayList();
 
+    public Comun(String nombre, String objetivo, String velocidad, int daño, int ptsVida, int coste) {
+        super(nombre, objetivo, velocidad, daño, ptsVida, coste);
+    }
+
     public Comun() {
-        this.posiblesCarta.add(new Cartas("Gigante Nombre", "Terrestres", "Media", 0, 0, 6));
-        this.posiblesCarta.add(new Cartas("Pandilla de Duendes", "Aereos y Terrestres", "Alta", 0, 0, 3));
+        this.posiblesCarta.add(new Comun("Gigante Nombre", "Terrestres", "Media", 0, 0, 6));
+        this.posiblesCarta.add(new Comun("Pandilla de Duendes", "Aereos y Terrestres", "Alta", 0, 0, 3));
     }
 
     public ArrayList<Cartas> getPosiblesCarta() {

@@ -66,15 +66,19 @@ public class Cartas {
     public int getCoste() {
         return coste;
     }
-
-    @Override
-    public String toString() {
+    
+    public String informacion(){
         return "La Carta "+nombre
                 +"\nAtaca objetivos: "+objetivo
                 +"\nTiene una Velocidad: "+velocidad+"Km/h"
                 +"\nInflinge un Daño: "+daño+"pts"
                 +"\nTienes estos puntos de Vida: "+ptsVida+"pts"
                 +"\nTienes un coste de: "+coste+" elixir";
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
     
     
